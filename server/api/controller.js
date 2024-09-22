@@ -18,7 +18,7 @@ exports.convertJsonData = (req, res) => {
 };
 
 exports.convertJsonIntoExcel = async (req, res) => {
-  const jsonData = req.body;
+  let jsonData = req.body;
   try {
     if (!Array.isArray(jsonData)) {
       jsonData = [jsonData];
@@ -41,7 +41,6 @@ exports.convertJsonIntoExcel = async (req, res) => {
     await workbook.xlsx.write(res);
     res.end();
   } catch (error) {
-    console.log(error)
     res.status(500).json({ error: "Error converting JSON to Excel" });
   }
 };
